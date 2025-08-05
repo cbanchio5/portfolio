@@ -1,2 +1,25 @@
 @import "tailwindcss";
 
+@layer components {
+  .nav__link {
+    @apply relative text-base font-medium w-fit block text-white;
+    
+  }
+
+    .nav__link::after {
+    content: '';
+    position: absolute;
+    height: 3px;
+    background-color: #facc15; /* Tailwind yellow-400 */
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease-in-out;
+    bottom: 0;
+    left: 0;
+  }
+
+  .nav__link:hover::after {
+    transform: scaleX(1);
+  }
+}
