@@ -1,4 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
 @import "tailwindcss";
+
+/* Apply Patrick Hand font globally */
+@layer base {
+  body {
+    @apply bg-white;
+    font-family: 'Patrick Hand', cursive;
+  }
+}
+
+/* Navigation link style */
+@layer components {
+  .nav__link {
+    @apply relative text-lg font-normal w-fit block text-black border-2 border-black rounded-md px-3 py-1 shadow-[2px_2px_0px_black] transition-colors duration-200;
+  }
+
+  .nav__link:hover {
+    @apply bg-gray-100;
+  }
+
+  /* Remove yellow underline effect from before, keep clean outline style */
+  .nav__link::after {
+    content: none;
+  }
+
+  /* Navbar container style */
+  .navbar {
+    @apply bg-white border-b-2 border-black px-5 py-3 flex justify-between items-center shadow-[0_3px_0_black];
+  }
+
+  /* Container with funky border and drop shadow */
+  .content-container {
+    @apply p-10 w-4/5 max-w-xl bg-white relative text-center mx-auto mt-28 drop-shadow-[3px_3px_0px_black] rounded-xl;
+  }
+
+  .content-container::before {
+    content: "";
+    position: absolute;
+    top: -4px; left: -4px; right: -4px; bottom: -4px;
+    border: 2px solid black;
+    border-radius: 12px;
+    pointer-events: none;
+    z-index: -1;
+    transform: rotate(-1.5deg);
+    box-shadow:
+      2px 1px 0 black,
+      -1px -2px 0 black,
+      0px 2px 0 black;
+  }
+
+  /* Button style */
+  .btn-outline {
+    @apply text-black bg-white border-2 border-black rounded-md px-5 py-2 text-lg shadow-[2px_1px_0_black,-1px_-2px_0_black] transition-colors duration-200;
+  }
+  
+  .btn-outline:hover {
+    @apply bg-gray-100;
+  }
+}
+
+
+/*@import "tailwindcss";
+
+
 
 @layer components {
   .nav__link {
@@ -10,7 +74,7 @@
     content: '';
     position: absolute;
     height: 3px;
-    background-color: #facc15; /* Tailwind yellow-400 */
+    background-color: #facc15; 
     width: 100%;
     transform: scaleX(0);
     transform-origin: right;
@@ -23,3 +87,4 @@
     transform: scaleX(1);
   }
 }
+  */
