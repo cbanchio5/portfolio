@@ -59,6 +59,27 @@
   }
 }
 
+  .container-drawn {
+      background: white;
+      position: relative;
+      text-align: center;
+      filter: drop-shadow(3px 3px 0px black);
+    }
+    .container-drawn::before {
+      content: "";
+      position: absolute;
+      top: -4px; left: -4px; right: -4px; bottom: -4px;
+      background: none;
+      border: 2px solid black;
+      border-radius: 12px;
+      pointer-events: none;
+      z-index: -1;
+      transform: rotate(-1.5deg);
+      box-shadow:
+        2px 1px 0 black,
+        -1px -2px 0 black,
+        0px 2px 0 black;
+    }
 
 /*@import "tailwindcss";
 
