@@ -1,6 +1,7 @@
 "use client"
 import { navLinks } from '@/app/constants/constants'
 import Link from 'next/link'
+import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { HiBars3 } from "react-icons/hi2";
 
@@ -34,7 +35,13 @@ const Nav = ({openNav} : Props) => {
       <div className="flex items-center h-full justify-between w-[95%] sm:w-[90%] xl:w-[80%] mx-auto">
 
         {/* Logo / Branding */}
-        <h1 className="text-2xl font-normal">Cesar Banchio</h1>
+        <Image 
+            src="/images/logo.png"
+            alt= "logo"
+            width={70}
+            height={70}
+            className='ml-[-1.5rem] sm:ml-0'
+        />
 
         {/* Desktop Navigation (lg and above) */}
         <div className="hidden lg:flex items-center space-x-8">
