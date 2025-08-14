@@ -5,71 +5,76 @@ import { FaDownload } from "react-icons/fa6";
 const Hero: React.FC = () => {
   const svgRef = useRef<SVGSVGElement | null>(null);
 
+  const blobPaths = [
+    "M0,0 C -20,-20, 20,-40, 50,-20 C 80,0, 60,40, 20,40 C -10,30, -20,20, 0,0 Z",
+    "M0,0 C -25,-10, 25,-30, 60,-10 C 90,10, 70,40, 30,50 C -5,40, -25,20, 0,0 Z",
+    "M0,0 C -15,-25, 15,-45, 45,-25 C 75,-5, 55,35, 15,35 C -10,25, -15,15, 0,0 Z",
+    "M0,0 C -30,-15, 30,-35, 65,-15 C 95,5, 75,45, 35,55 C -5,45, -30,20, 0,0 Z"
+  ];
+
+  const colors = ["#7dc6ff", "#ffb3c6", "#a3d9a5", "#ffd27f", "#c6a3ff"];
+
+  const createSplash = (x: number, y: number) => {
+  const svg = svgRef.current;
+  if (!svg) return;
+
+  const pathData = blobPaths[Math.floor(Math.random() * blobPaths.length)];
+  const color = colors[Math.floor(Math.random() * colors.length)];
+
+  const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  path.setAttribute("d", pathData);
+  path.setAttribute("fill", color);
+  path.setAttribute("opacity", "0");
+  path.setAttribute("filter", "url(#watercolor)");
+
+  // Start small and rotated
+  const rotation = Math.random() * 360;
+  path.setAttribute("transform", `translate(${x}, ${y}) scale(0) rotate(${rotation})`);
+  path.style.transition = "transform 1s ease-out, opacity 1s ease-out";
+
+  svg.appendChild(path);
+
+  // Animate to final scale & opacity
+  requestAnimationFrame(() => {
+    const scale = 0.8 + Math.random() * 0.5;
+    path.setAttribute("transform", `translate(${x}, ${y}) scale(${scale}) rotate(${rotation})`);
+    path.setAttribute("opacity", (0.2 + Math.random() * 0.3).toString());
+  });
+};
+
+
   useEffect(() => {
     const svg = svgRef.current;
     if (!svg) return;
 
-    const blobPaths = [
-      "M0,0 C -20,-20, 20,-40, 50,-20 C 80,0, 60,40, 20,40 C -10,30, -20,20, 0,0 Z",
-      "M0,0 C -25,-10, 25,-30, 60,-10 C 90,10, 70,40, 30,50 C -5,40, -25,20, 0,0 Z",
-      "M0,0 C -15,-25, 15,-45, 45,-25 C 75,-5, 55,35, 15,35 C -10,25, -15,15, 0,0 Z",
-      "M0,0 C -30,-15, 30,-35, 65,-15 C 95,5, 75,45, 35,55 C -5,45, -30,20, 0,0 Z"
-    ];
-
-    const colors = ["#7dc6ff", "#ffb3c6", "#a3d9a5", "#ffd27f", "#c6a3ff"];
-
-    const createSplash = (x: number, y: number) => {
-      const pathData = blobPaths[Math.floor(Math.random() * blobPaths.length)];
-      const color = colors[Math.floor(Math.random() * colors.length)];
-
-      const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
-      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-
-      path.setAttribute("d", pathData);
-      path.setAttribute("fill", color);
-      path.setAttribute("opacity", (0.2 + Math.random() * 0.3).toString());
-      path.setAttribute("filter", "url(#watercolor)");
-
-      g.appendChild(path);
-      g.setAttribute("transform", `translate(${x}, ${y}) scale(0)`);
-      svg.appendChild(g);
-
-      requestAnimationFrame(() => {
-        const finalScale = 0.8 + Math.random() * 0.5;
-        const rotation = Math.random() * 360;
-        g.style.transition = "transform 0.8s ease-out";
-        g.setAttribute("transform", `translate(${x}, ${y}) scale(${finalScale}) rotate(${rotation})`);
-      });
-    };
-
-    const createRandomSplash = () => {
-      if (!svg) return;
-      const rect = svg.getBoundingClientRect();
+    // Create 3 initial random splashes
+    const rect = svg.getBoundingClientRect();
+    for (let i = 0; i < 5; i++) {
       const x = Math.random() * rect.width;
       const y = Math.random() * rect.height;
       createSplash(x, y);
-    };
-
-    // Initial splashes
-    for (let i = 0; i < 5; i++) createRandomSplash();
-
-    const handleClick = (e: MouseEvent) => {
-      if (!svg) return;
-      const rect = svg.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      createSplash(x, y);
-    };
-
-    svg.addEventListener("click", handleClick);
-    return () => svg.removeEventListener("click", handleClick);
+    }
   }, []);
 
+  const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const svg = svgRef.current;
+    if (!svg) return;
+
+    const rect = svg.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    createSplash(x, y);
+  };
+
   return (
-    <div className='w-full pt-[4vh] md:pt-[12vh] h-screen bg-[#FEFEFA] overflow-hidden relative'>
+    <div
+      className='w-full pt-[4vh] md:pt-[12vh] h-screen bg-[#FEFEFA] overflow-hidden relative'
+      onClick={handleClick}
+    >
+      {/* SVG background for splashes */}
       <svg
         ref={svgRef}
-        className="absolute top-0 left-0 w-full h-full pointer-events-none"
+        className="absolute top-0 left-0 w-full h-full"
       >
         <defs>
           <filter id="watercolor">
@@ -80,6 +85,7 @@ const Hero: React.FC = () => {
         </defs>
       </svg>
 
+      {/* Hero content */}
       <div className="flex justify-center flex-col w-4/5 h-full mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12">
           <div>
@@ -102,6 +108,6 @@ const Hero: React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Hero;
