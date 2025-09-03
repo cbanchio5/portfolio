@@ -68,7 +68,7 @@ const Hero: React.FC = () => {
 
   return (
     <div
-      className='w-full pt-[4vh] md:pt-[12vh] h-screen bg-[#FEFEFA] overflow-hidden relative'
+      className='w-full pt-[4vh] md:pt-[10vh] h-screen bg-[#FEFEFA] overflow-hidden relative'
       onClick={handleClick}
     >
       {/* SVG background for splashes */}

@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
 /* Apply Patrick Hand font globally */
 @layer base {
   body {
     @apply bg-white;
-    font-family: 'Patrick Hand', cursive;
+    font-family: 'Saira';
   }
 }
 
@@ -81,31 +82,36 @@
         0px 2px 0 black;
     }
 
-/*@import "tailwindcss";
 
-
-
-@layer components {
-  .nav__link {
-    @apply relative text-base font-medium w-fit block text-white;
-    
-  }
-
-    .nav__link::after {
-    content: '';
-    position: absolute;
-    height: 3px;
-    background-color: #facc15; 
-    width: 100%;
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.3s ease-in-out;
-    bottom: 0;
-    left: 0;
-  }
-
-  .nav__link:hover::after {
-    transform: scaleX(1);
-  }
+.handmade-btn {
+  position: relative;
+  display: inline-block;
+  padding: 0.6em 1.5em;
+  font-family: "Patrick Hand", "Comic Neue", sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #000;
+  background-color: #fff;
+  border: 2px solid #000;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.2s ease;
 }
-  */
+
+/* shaky hand-drawn border effect */
+
+.handmade-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid #000;
+  border-radius: 12px;
+  z-index: -1;
+}
+
+/* hover effect */
+.handmade-btn:hover {
+  transform: scale(1.03);
+}
+
