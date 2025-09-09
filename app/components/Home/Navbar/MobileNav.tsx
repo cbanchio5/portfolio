@@ -16,7 +16,7 @@ const MobileNav = ({showNav, closeNav} : Props) => {
   return (
     <div>
       {/* Overlay*/}
-      <div className={`fixed ${navOpen} transform transition-all duration-500 bg-white z-[1000] opacity-70 w-full h-screen`}></div>
+      <div className={`fixed ${navOpen} transform transition-all duration-500 bg-white z-[1000] opacity-100 w-full h-screen`}></div>
       {/* Nav Links*/}
       <div className={`text-black ${navOpen} transform transition-all duration-500 delay-300 fixed justify-center flex flex-col h-full w-[80%] sm:w-[60%] bg:white space-y-6 z-[1006]`}>
         

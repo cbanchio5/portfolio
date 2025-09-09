@@ -1,4 +1,5 @@
 "use client"
+import Image from 'next/image';
 import React, { useEffect, useRef } from 'react';
 import { FaDownload } from "react-icons/fa6";
 
@@ -89,7 +90,7 @@ const Hero: React.FC = () => {
       <div className="flex justify-center flex-col w-4/5 h-full mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12">
           <div>
-            <h1 className="text-2xl md:text-3xl lg:text-4xl mb-5 text-black font-semibold">Hi, I am Cesar Banchio</h1>
+            <h1 className="text-2xl md:text-3xl lg:text-4xl mb-5 text-black font-semibold"  >I am Cesar Banchio</h1>
             <h1 className='text-bg text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold md:leading-[3rem] lg:leading-[3.5rem] xl:leading-[4rem]  text-black'>
               FullStack Web Developer
             </h1>
@@ -103,7 +104,12 @@ const Hero: React.FC = () => {
               <FaDownload />
             </button>
           </div>
-          <div></div>
+            {/* Image content */}
+          <div className='mx-auto hidden lg:block rounded-[3rem] border-[3.5px] container-drawn'>
+            <Image src="/images/profile_pic.png" alt="profile photo" width={500} height={500}/>
+          
+
+          </div>
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ import ResponsiveNav from "./components/Home/Navbar/ResponsiveNav";
 import Footer from "./components/Home/Footer/Footer";
 import ScrollToTop from "./components/Helper/ScrollToTop";
 
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
